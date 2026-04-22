@@ -20,9 +20,13 @@ SRCS = \
 	srcs/parsing/validate_map.c \
 	srcs/parsing/init_mlx.c \
 	srcs/parsing/print_tex_lib.c \
-	srcs/system/utils.c	\
 	srcs/blob/build_blob.c \
-	srcs/blob/build_hdr.c	
+	srcs/blob/blob_helpers.c \
+	srcs/blob/build_rt.c \
+	srcs/blob/build_def.c \
+	srcs/blob/print_blob.c \
+	srcs/blob/build_helpers.c \
+	srcs/blob/build_hdr.c
 
 OBJS = $(SRCS:%.c=$(OBJ_DIR)/%.o)
 

@@ -31,6 +31,8 @@ int main(int ac, char **av)
 	if (!build_blob(data, &blob))
 		return (printf("1\n"), false);
 
+	print_blob(blob);
+
 	free(blob);
 
 	// print

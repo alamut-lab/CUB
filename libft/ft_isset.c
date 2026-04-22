@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-int	ft_isset(char c, char const *set)
+bool	ft_isset(char c, char const *set)
 {
 	int	i;
 
@@ -20,8 +20,8 @@ int	ft_isset(char c, char const *set)
 	while (set[i])
 	{
 		if (c == set[i])
-			return (1);
+			return (true);
 		i++;
 	}
-	return (0);
+	return (false);
 }

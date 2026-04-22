@@ -23,10 +23,8 @@ bool inc_size_t_to_64_mult(size_t *val)
 		return (true);
 	if (*val > SIZE_MAX - 64)
 		return (false);
-	printf("BEFORE = %zd\n", *val);
 	while ((*val % 64) != 0)
 		(*val)++;
-	printf("AFTER = %zd\n", *val);
 	return (true);
 }
 
@@ -35,21 +33,21 @@ bool	fill_tmp_hdr(t_data *d, t_tmp_header *hdr)
 	size_t	tmp;
 	size_t	one_px_size;
 	int		i;
-	int		y;
+	// int		y;
 
 	i = 0;
-	y = 0;
+	// y = 0;
 	hdr->px_size = 0;
 	while (i < d->textures_len)
 	{
 		if (!d->textures_defs[i].is_color)
 		{
-			if (__builtin_mul_overflow((size_t)d->img_tab[y].width, (size_t)d->img_tab[y].height, &tmp) || \
+			if (__builtin_mul_overflow((size_t)d->img_tab[i].width, (size_t)d->img_tab[i].height, &tmp) || \
 				__builtin_mul_overflow(tmp, sizeof(uint32_t), &one_px_size) || \
 				__builtin_add_overflow(hdr->px_size, one_px_size, &hdr->px_size) || \
 				!inc_size_t_to_64_mult(&hdr->px_size))
 				return (false);
-			y++;
+			// y++;
 		}
 		i++;
 	}

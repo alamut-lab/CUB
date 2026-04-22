@@ -383,14 +383,14 @@ test flag	if (flags & CELL_HAS_DOOR)
 # define CELL_HAS_AIR			(1u << 1)
 # define CELL_HAS_DOOR			(1u << 2)
 # define CELL_HAS_OBJ			(1u << 3)
-
+# define CELL_HAS_MSTR			(1u << 3)
 # define MAP_SOA_LAYERS			3
 
 typedef struct	s_map_soa
 {
 	uint8_t		*flags;
 	uint8_t		*block_id; // wall and air
-	uint8_t		*bonus_id; // door and obj
+	uint8_t		*occ_id; // door and obj
 }				t_map_soa;
 
 # define MONSTER_MOVE			(1u << 0)
@@ -404,11 +404,12 @@ typedef struct	s_monster_rt
 	uint8_t		flags;
 	uint8_t		def_id;
 	uint8_t		current_hp;
-	uint8_t		padding;
+	uint8_t		pad1;
 	t_xy_double	pos;
 	t_xy_double	dir;
 	t_xy_double	last_player_pos;
-	uint64_t	pad;
+	uint32_t	map_id;
+	uint32_t	pad2;
 }				t_monster_rt;
 
 # define DOOR_CLOSING			(1u << 0)
@@ -420,7 +421,7 @@ typedef struct	s_door_rt
 	uint8_t		flags;
 	uint8_t		def_id;
 	uint8_t		open_ratio_255;
-	uint8_t		padding;
+	uint8_t		pad;
 	uint32_t	map_id;
 }				t_door_rt;
 
@@ -517,10 +518,42 @@ typedef struct s_tmp_header
 	size_t	px_size;
 }	t_tmp_header;
 
-bool	fill_tmp_hdr(t_data *d, t_tmp_header *hdr);
-bool build_hdr(t_data *d, void *blob, t_tmp_header *tmp);
+typedef enum	e_block_type
+{
+	T_WALL,
+	T_AIR,
+	T_DOOR,
+	T_OBJ,
+	T_MSTR,
+	T_PLAYER
+}				t_block_type;
+
+typedef struct	s_tmp_cell
+{
+	size_t l;
+	size_t c;
+	size_t soa_idx;
+	size_t mstr_idx;
+	size_t door_idx;
+	char m;
+	char b;
+}				t_tmp_cell;
+
 bool get_alloc_size(t_tmp_header *hdr, size_t *out);
 bool build_blob(t_data *d, void **blob);
+
+bool fill_tmp_hdr(t_data *d, t_tmp_header *hdr);
+bool build_hdr(t_data *d, void *blob, t_tmp_header *tmp);
+
+void build_rt(t_data *d, void *blob);
+void build_bdef(t_data *d, void *blob);
+
+void print_blob(void *blob);
+
+// build_helpers
+int16_t get_block_id(char sym, t_data *d, t_block_type type);
+int16_t get_def_id(char *ids, char sym);
+
 
 // blob_helpers
 t_blob_hdr     *get_blob_hdr(void *blob);
@@ -536,12 +569,12 @@ uint8_t        *get_map_bonus_ids(void *blob);
 t_map_soa       get_map_soa(void *blob);
 
 t_monster_rt   *get_monster_rt(void *blob);
-t_monster_rt   *get_door_rt(void *blob);
+t_door_rt	   *get_door_rt(void *blob);
 
 t_bdef_wall    *get_wall_bdef(void *blob);
 t_bdef_air     *get_air_bdef(void *blob);
 t_bdef_door    *get_door_bdef(void *blob);
-t_bdef_monster *get_monster_bdef(void *blob);
+t_bdef_monster *get_mstr_bdef(void *blob);
 t_bdef_obj     *get_obj_bdef(void *blob);
-
+t_bdef_tex		*get_tex_bdef(void *blob);
 #endif

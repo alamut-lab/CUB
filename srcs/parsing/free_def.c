@@ -16,6 +16,7 @@ void free_textures_def(t_texture_def **tex, size_t len)
         i++;
     }
     free((*tex));
+	*tex = NULL;
 }
 
 void free_all_def(t_data *d)

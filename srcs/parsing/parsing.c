@@ -30,7 +30,7 @@ size_t count_doors_rt(t_data *d)
 	while (i < d->m_height)
 	{
 		y = 0;
-		while(y < d->m_max_width)
+		while(map[i][y]) // y < d->m_max_width
 		{
 			if (ft_isset(map[i][y], d->door_ids))
 				count++;
@@ -54,7 +54,7 @@ size_t count_monster_rt(t_data *d)
 	while (i < d->m_height)
 	{
 		y = 0;
-		while(y < d->m_max_width)
+		while(map[i][y]) // y < d->m_max_width
 		{
 			if (ft_isset(map[i][y], d->monster_ids))
 				count++;

@@ -144,7 +144,7 @@ bool check_wall_section(t_parsing *p, size_t len)
     {
         p->idx.col = 0;
         if (!check_wall_line(p, y))
-            return (free(p->data->walls_defs), false);
+            return (false); // free(p->data->walls_defs), p->data->walls_defs = NULL, 
         y++;
         i->line++;
     }
