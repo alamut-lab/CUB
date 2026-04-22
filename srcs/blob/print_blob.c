@@ -70,19 +70,30 @@ void	print_map_flags_pretty(t_map_soa map, size_t width, size_t height)
 	size_t	idx;
 
 	printf("\nFLAG VIEW\n");
+	print_sep_line(width);
 	l = 0;
 	while (l < height)
 	{
+		printf("%3zu |", l);
 		c = 0;
 		while (c < width)
 		{
 			idx = l * width + c;
-			printf("%c ", get_flag_char(map.flags[idx]));
+			printf(" %3c ", get_flag_char(map.flags[idx]));
 			c++;
 		}
-		printf("\n");
+		printf("|\n");
 		l++;
 	}
+	print_sep_line(width);
+		printf("      ");
+	c = 0;
+	while (c < width)
+	{
+		printf("%3zu  ", c);
+		c++;
+	}
+	printf("\n");
 }
 
 void	print_map_soa(t_map_soa map, size_t width, size_t height)
