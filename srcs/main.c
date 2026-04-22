@@ -13,6 +13,9 @@ int main(int ac, char **av)
 		return (printf("2\n"), 1);
 	if (!parse_file(av[1], data))
 		return (1);
+
+	print_parsing(data);
+
 	// init mlx
 	t_screen *screen;
 

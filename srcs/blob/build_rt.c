@@ -135,6 +135,11 @@ void build_rt(t_data *d, void *blob)
 			c.soa_idx++;
 			c.c++;
 		}
+		while (c.c < d->m_max_width)
+		{
+			c.soa_idx++;
+			c.c++;
+		}
 		c.l++;
 	}
 }

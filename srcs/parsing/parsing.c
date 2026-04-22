@@ -105,7 +105,6 @@ bool parse_file(char *filename, t_data *d)
 	if (!get_ids(&p))
 		return (free_str_tab(p.file_content), free_ids(p.data), free_all_def(p.data), free(p.data), print_perr(&p.idx), false);
 	// check map
-	
 	if (!validate_map(d, &p.idx))
 		return (free_str_tab(p.file_content), free_ids(p.data), free_all_def(p.data), free(p.data), print_perr(&p.idx), false);
 	p.data->door_rt_count = (uint16_t)count_doors_rt(p.data);

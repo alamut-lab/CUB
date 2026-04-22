@@ -398,8 +398,8 @@ void print_bdefs(void *blob)
 void print_blob(void *blob)
 {
 	print_hdr(get_blob_hdr(blob));
-	// print_map_soa(get_map_soa(blob), get_map_width(blob), get_map_height(blob));
-	// print_door_rt(blob);
-	// print_mstr_rt(blob);
-	// print_bdefs(blob);
+	print_map_soa(get_map_soa(blob), get_map_width(blob), get_map_height(blob));
+	print_door_rt(blob);
+	print_mstr_rt(blob);
+	print_bdefs(blob);
 }

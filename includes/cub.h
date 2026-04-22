@@ -383,7 +383,7 @@ test flag	if (flags & CELL_HAS_DOOR)
 # define CELL_HAS_AIR			(1u << 1)
 # define CELL_HAS_DOOR			(1u << 2)
 # define CELL_HAS_OBJ			(1u << 3)
-# define CELL_HAS_MSTR			(1u << 3)
+# define CELL_HAS_MSTR			(1u << 4)
 # define MAP_SOA_LAYERS			3
 
 typedef struct	s_map_soa
